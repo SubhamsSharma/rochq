@@ -12,14 +12,14 @@ function App() {
   const [filterBy, setFilterBy] = useState('all')
   
   return (
-    <div className="flex flex-row m-0 ">
+    <div className="flex flex-row text-textColor bg-transparent">
       <div className='min-w-max'>
         <Header onClick={setFilterBy}/>
        <MailList filterBy={filterBy}/>
       </div>
-      <div className='bg-backgroundColor p-5 m-5 w-auto '>
+      {/* <div className='bg-orange-400 p-5 m-5 w-auto max-h-min'> */}
         <Outlet />
-      </div>
+      {/* </div> */}
        
        
     </div>

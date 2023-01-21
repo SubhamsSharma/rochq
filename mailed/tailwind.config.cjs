@@ -11,7 +11,7 @@ module.exports = {
         backgroundColor:"#f4f5f9",
         borderColor:"#cfd2dc",
         textColor:"#636363",
-        filterColor:"#e1e4ea",
+        filterButtonColor:"#e1e4ea",
         readBg:"#f2f2f2",
       }
     },

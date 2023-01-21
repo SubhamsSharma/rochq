@@ -1,9 +1,9 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const FavoriteMailContext = createContext(null)
 const FavoriteMailDispatchContext = createContext(null)
 
-
+const initialState = []
 function favoriteMailReducer(favMails, action){
     switch (action.type) {
         case 'addToFavorite':
@@ -16,9 +16,19 @@ function favoriteMailReducer(favMails, action){
     }
 }
 
+const initializer = (initialValue = initialState) => (
+    JSON.parse(localStorage.getItem("localFavorites")) || initialValue
+)
+
+
 export default function FavoriteMailProvider({children}){
     
-const [favMails, dispatch ] = useReducer(favoriteMailReducer, [] )
+const [favMails, dispatch ] = useReducer(favoriteMailReducer, initialState, initializer )
+
+useEffect(() => {
+  localStorage.setItem("localFavorites", JSON.stringify(favMails))
+}, [favMails])
+
 
     return (
        <FavoriteMailContext.Provider value={favMails}>

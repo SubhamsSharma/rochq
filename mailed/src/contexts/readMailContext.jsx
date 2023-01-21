@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect} from "react";
 
 const ReadMailContext = createContext(null)
 const ReadMailDispatchContext = createContext(null)
@@ -7,7 +7,7 @@ const ReadMailDispatchContext = createContext(null)
 function readMailReducer(readMails, action){
     switch (action.type) {
         case 'addToRead':
-            console.log([...readMails, action.id])
+            
             if(readMails.includes(action.id)) return [...readMails]
             return [...readMails, action.id]
             
@@ -16,9 +16,18 @@ function readMailReducer(readMails, action){
     }
 }
 
+const initializer = (initialValue = initialState) => (
+    JSON.parse(localStorage.getItem("localReadMails")) || initialValue
+)
+
 export default function ReadMailProvider({children}){
     
-const [readMails, dispatch ] = useReducer(readMailReducer, [] )
+const [readMails, dispatch ] = useReducer(readMailReducer, [], initializer )
+
+useEffect(() => {
+    localStorage.setItem("localReadMails", JSON.stringify(readMails))
+  }, [readMails])
+  
 
     return (
        <ReadMailContext.Provider value={readMails}>

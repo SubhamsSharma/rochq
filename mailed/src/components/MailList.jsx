@@ -7,6 +7,7 @@ import { useFavoriteMails } from '../contexts/favoriteMailContext'
 import { useReadMails } from '../contexts/readMailContext'
 import { useDispatchToReadMails } from '../contexts/readMailContext'
 
+
 function MailList({filterBy}) {
  
   const { isLoading, isError, data, error } = useQuery({
@@ -36,7 +37,7 @@ function MailList({filterBy}) {
       filteredList = unReadMails
     }
 
-    console.log(favoriteMails)
+    
       if (isLoading) {
         return <span>Loading...</span>
       }
@@ -44,18 +45,12 @@ function MailList({filterBy}) {
       if (isError) {
         return <span>Error: {error.message}</span>
       }
-    
-      // const addToRead = (e, mailId) => {
-          
-      //      dispatchToRead({type:'addToRead', id:mailId})
-      //      console.log('dispatchToread')
-      // }
      
       return (
         <>
           
          {filteredList.map(mail => (
-        <Link key={mail.id} to={mail.id} >
+        <Link key={mail.id} to={mail.id} state={{name:mail.from.name, subject:mail.subject, timeStamp:mail.date}}>
           <div onClick={() => dispatchToRead({type:'addToRead', id:mail.id})}>
             <Mail {...mail}/>
           </div>
@@ -73,9 +68,4 @@ async function fetchMails(){
     return await fetch("https://flipkart-email-mock.now.sh/?page=1").then(res => res.json())  
 }
   
-// function getfilteredMails(data ,filter){
-//   if(filter === 'all') return data
-//   if(filter === 'favorites') {
-//     return data.filter(mail => )}
-// }
 export default MailList
