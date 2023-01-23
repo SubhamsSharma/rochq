@@ -36,7 +36,7 @@ function MailDetails() {
     return <span>Error: {error.message}</span>
   }
   return (
-    <div className='space-y-10 bg-backgroundColor max-h-full my-11 p-5 mx-auto ml-10'>
+    <div className='space-y-10 bg-backgroundColor max-h-full my-14 p-5 mx-auto ml-10'>
       {/* <div>mailbody header goes here</div> */}
 
       <div className='flex flex-row justify-between'>
@@ -61,7 +61,7 @@ function MailDetails() {
       </div>
       
 
-      {parse(data.body)}
+      <div className='text-left pl-16 pr-5 space-y-10'>{parse(data.body)}</div>
       
       
     </div>
