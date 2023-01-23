@@ -7,7 +7,8 @@ Live at  [mailedApp](https://mailed.netlify.app/)
 Tech stacks used in building the app are ...
 
 ### React
-### react-router-dom(routing)
-### react-query(server state)
-### Context_Api(globalState)
-
+### react-router-dom
+### react-query
+### Context_Api
+### vite
+### tailwindCSS
