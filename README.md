@@ -6,6 +6,6 @@ Live at .....
 
 Tech stacks used in building the app are ...
 
-#React
-#react-router
-#react-query
+# React
+# react-router
+# react-query
