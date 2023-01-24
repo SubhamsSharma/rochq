@@ -2,34 +2,28 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import parse from 'html-react-parser'
-import { useLocation } from 'react-router-dom'
-// import { useQueryClient } from '@tanstack/react-query'
+import { useOutletContext } from 'react-router-dom'
 import { useDispatchToFavoriteMails } from '../contexts/favoriteMailContext'
 import { epochToDateTime } from '../utils/timeStampToDateTime'
 
-
 async function fetchMailById(id){
-  return await fetch(`https://flipkart-email-mock.now.sh/?id=${id}`).then(res => res.json())
+    return await fetch(`https://flipkart-email-mock.now.sh/?id=${id}`).then(res => res.json()) 
 }
 
 function MailDetails() {
-  // const queryClient = useQueryClient()
-  const location = useLocation()
   const { id } = useParams()
   const  dispatchToFav  = useDispatchToFavoriteMails()
-  const {name, subject, timeStamp} = location.state
+  // use OutLetContext to recieve date passed via context 
+  const prevList = useOutletContext()
+  const prevData = prevList.find(item => item.id === id)
+  const {from:{name}, subject, date:timeStamp} = prevData
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['mail',id],
     queryFn: () => fetchMailById(id),
-    // initialData: () => {
-    //   // Use a mail from the 'mails' query as the initial data for this mail query
-      
-    //   return queryClient.getQueryData(['mails'])?.list?.find((d) => d.id === id) ?? undefined
-    // },
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span className=' m-32'>Loading...</span>
   }
 
   if (isError) {
@@ -46,23 +40,20 @@ function MailDetails() {
         </div>
       <div>
         <p className='font-semibold text-left'>{subject}</p>
-        <p>{epochToDateTime(timeStamp)}</p>
+        <p className='mt-2'>{epochToDateTime(timeStamp)}</p>
       </div>
       </div>
       <button 
-      className='bg-accent py-1 px-3 rounded-lg text-white'
+      className='bg-accent py-0.5 px-2 rounded-2xl text-white'
       onClick={() => {
         dispatchToFav({type:'addToFavorite' , id:id})
-
       }
       }>
         Mark as favorite
       </button>
       </div>
       
-
-      <div className='text-left pl-16 pr-5 space-y-10'>{parse(data.body)}</div>
-      
+      <div className='text-left pl-16 pr-5'>{parse(data.body)}</div>
       
     </div>
   )
