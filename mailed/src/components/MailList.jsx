@@ -5,6 +5,8 @@ import { useDispatchToReadMails } from '../contexts/readMailContext'
 
 function MailList({listData }) {
 
+  let activeClassName = 'text-black'
+
   const dispatchToRead = useDispatchToReadMails()
       return (
         <div>
@@ -14,7 +16,7 @@ function MailList({listData }) {
         <NavLink 
           key={mail.id} 
           to={mail.id}
-          className={({ isActive }) => isActive? 'border-left-4 border-green-500 border-solid' : null}>
+          className={({ isActive }) => isActive? activeClassName : undefined}>
           <div onClick={() => dispatchToRead({type:'addToRead', id:mail.id})}>
             <Mail {...mail}/>
           </div>

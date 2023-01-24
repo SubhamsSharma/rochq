@@ -20,6 +20,7 @@ function MailDetails() {
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['mail',id],
     queryFn: () => fetchMailById(id),
+    keepPreviousData:true,
     enabled: !!id,
   })
 

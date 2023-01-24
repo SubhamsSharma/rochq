@@ -20,9 +20,7 @@ function App() {
 
   let favMails = useFavoriteMails()
   let readMailList = useReadMails()
-  // 
-
-// filter data here
+  
 
 
 
@@ -52,7 +50,7 @@ if(filterBy === 'read'){
 if(filterBy === 'unread'){
   filteredList = unReadMails
 }
- 
+//  removed text color
   return (
     <div className="flex flex-row text-textColor bg-transparent">
       <div className='min-w-max flex-grow'>
