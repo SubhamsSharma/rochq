@@ -32,7 +32,7 @@ function MailDetails() {
     return <span>Error: {error.message}</span>
   }
   return (
-    <div className='space-y-10 bg-backgroundColor max-h-full my-14 p-5 mx-auto ml-10'>
+    <div className='space-y-10 bg-backgroundColor max-h-full my-14 p-5 mx-auto ml-10 rounded-lg'>
       {/* <div>mailbody header goes here</div> */}
 
       <div className='flex flex-row justify-between'>

@@ -2,7 +2,7 @@ export default function Button({variant, onClick}){
     return(
         <button 
           onClick={onClick} 
-          className='bg-filterButtonColor p-1 rounded-md focus:bg-yellow-200 focus:text-black'
+          className='px-1 py-0.5 rounded-lg focus:bg-filterButtonColor text-lg focus:text-black'
         >
           {variant}
         </button>
